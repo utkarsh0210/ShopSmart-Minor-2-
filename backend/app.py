@@ -18,7 +18,7 @@ def search():
     search_term = data.get("searchTerm", "").lower()
     min_price = float(data.get("minPrice", 0))
     max_price = float(data.get("maxPrice", float("inf")))
-    user_email = "pramiti0309@gmail.com"
+    user_email = "receiver_email@gmail.com"
     
     print("Received:", search_term, min_price, max_price, user_email)
 
