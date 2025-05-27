@@ -10,8 +10,8 @@ from email.message import EmailMessage
 load_dotenv()
 api_key = os.getenv('API_KEY')
 
-email_user = "gutkarsh9838@gmail.com"
-email_pass = "qtkg qkkv cdgk cuxa"
+email_user = "youremail@gmail.com"
+email_pass = "your password"
 
 
 def send_email(user_email):
