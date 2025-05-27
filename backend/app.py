@@ -3,7 +3,6 @@ from flask_cors import CORS
 import json
 from main import send_query
 
-
 app = Flask(__name__)
 CORS(app)
 
@@ -19,11 +18,12 @@ def search():
     search_term = data.get("searchTerm", "").lower()
     min_price = float(data.get("minPrice", 0))
     max_price = float(data.get("maxPrice", float("inf")))
-
-    print("Received:", search_term, min_price, max_price)
+    user_email = "pramiti0309@gmail.com"
+    
+    print("Received:", search_term, min_price, max_price, user_email)
 
     # Step 1: Query Google Shopping using SerpAPI
-    filtered = send_query(search_term,min_price , max_price)
+    filtered = send_query(search_term, min_price, max_price,user_email)
 
     return jsonify(filtered)
 

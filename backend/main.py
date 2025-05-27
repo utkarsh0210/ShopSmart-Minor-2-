@@ -3,12 +3,36 @@ import json
 import re
 from dotenv import load_dotenv
 import os
+import smtplib
+from email.message import EmailMessage
+
 
 load_dotenv()
 api_key = os.getenv('API_KEY')
 
+email_user = "gutkarsh9838@gmail.com"
+email_pass = "qtkg qkkv cdgk cuxa"
 
-def send_query(searchTerm, min_price, max_price):
+
+def send_email(user_email):
+    msg = EmailMessage()
+    msg["Subject"] = "ShopSmart - Products Available in Your Price Range!"
+    msg["From"] = email_user
+    msg["To"] = user_email
+
+    content = "Hello,\n\nProducts are  available in your price range....!!!\n\n"
+    
+    msg.set_content(content)
+
+    # Send the email using Gmail's SMTP server
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(email_user, email_pass)
+        smtp.send_message(msg)
+        print("Mail Sent!!!")
+
+
+
+def send_query(searchTerm, min_price, max_price,user_email=None):
     params = {
         "engine": "google_shopping",
         "q": searchTerm,
@@ -40,5 +64,8 @@ def send_query(searchTerm, min_price, max_price):
     # Save only the new query results to the JSON
     with open(r'E:\google_shopping\ShopSmart\backend\data\api_results.json', "w") as f:
         json.dump(filtered, f, indent=2)
+
+        if filtered and  user_email:
+            send_email(user_email)
 
     return filtered
